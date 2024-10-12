@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->uuid('_pid');
+            $table->ulid('_pid')->primary();
+            $table->string('sku')->unique();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->decimal('price', 8, 2);
+            $table->enum('status',['available','outofstock','discontinued'])->default('available');
+            $table->ulid('inventory_id');
             $table->timestamps();
         });
     }
