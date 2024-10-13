@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
@@ -35,6 +36,11 @@ class Product extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    // Relation: A product belongs to many category record
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
     // Relation: A product belongs to an inventory record
     public function inventory(): HasOne
