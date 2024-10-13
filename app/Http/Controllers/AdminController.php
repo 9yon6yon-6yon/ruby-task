@@ -23,5 +23,11 @@ class AdminController extends Controller
     public function delete(){
         return  response()->json(['route'=> 'delete']);
     }
+    public function listProducts(){
+        return view('admin.products');
+    }
+    public function productAdd(){
+        return view('admin.addproduct');
+    }
 
 }

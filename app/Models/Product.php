@@ -21,8 +21,7 @@ class Product extends Model
         'sku',
         'name',
         'description',
-        'price',
-        'inventory_id'
+        'price'
     ];
     protected static function boot()
     {
