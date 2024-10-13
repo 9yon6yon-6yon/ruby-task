@@ -102,7 +102,8 @@ class AdminController extends Controller
 
     public function ProductView($id)
     {
-        return response('okay product details ' . $id);
+        $product = Product::with('inventory', 'stockHistories', 'images')->findOrFail($id);
+        return view('admin.productdetails', compact('product'));
     }
     // Show a form to edit an existing product
     public function edit($id)
