@@ -15,6 +15,7 @@ return new class extends Migration
             $table->ulid('_pid')->primary();
             $table->ulid('_userid');
             $table->string('sku')->unique();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('name');
             $table->text('description')->nullable();
             $table->decimal('price', 8, 2);
