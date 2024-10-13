@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->ulid('_pid')->primary();
+            $table->ulid('_userid');
             $table->string('sku')->unique();
             $table->string('name');
             $table->text('description')->nullable();
             $table->decimal('price', 8, 2);
             $table->enum('status',['available','outofstock','discontinued'])->default('available');
-            $table->ulid('inventory_id');
             $table->timestamps();
         });
     }
