@@ -8,10 +8,13 @@
     <!--favicon-->
     <link rel="icon" href="{{ asset('backend/assets/images/favicon-32x32.png') }}" type="image/png" />
     <!--plugins-->
+    <link href="{{ asset('backend/assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('backend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+
     <!-- loader-->
     <link href="{{ asset('backend/assets/css/pace.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('backend/assets/js/pace.min.js') }}"></script>
@@ -75,9 +78,8 @@
         new PerfectScrollbar(".app-container")
     </script>
 
-    <script>
-        @yield('jsfunction')
-    </script>
+    @yield('jsfunction')
+
 </body>
 
 </html>
