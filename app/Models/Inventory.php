@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 class Inventory extends Model
 {
     use HasFactory, HasUlids;
+    protected $table = 'inventory';
     public $incrementing = false;
     protected $keyType = 'string';
     protected $primaryKey = 'id';

@@ -45,16 +45,16 @@ class Product extends Model
     // Relation: A product belongs to an inventory record
     public function inventory(): HasOne
     {
-        return $this->hasOne(Inventory::class);
+        return $this->hasOne(Inventory::class, '_puid', '_pid');
     }
 
     // Relation: A product has many stock history records
     public function stockHistories(): HasMany
     {
-        return $this->hasMany(StockHistory::class);
+        return $this->hasMany(StockHistory::class, 'product_id', '_pid');
     }
     public function images(): HasMany
     {
-        return $this->hasMany(ProductImage::class);
+        return $this->hasMany(ProductImage::class, 'product_id', '_pid');
     }
 }
