@@ -8,7 +8,11 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function index(){
-        return response()->json(User::all());
+        // return response()->json(User::all());
+        return view('admin.index');
+    }
+    public function AdminLogin(){
+        return view('admin.login');
     }
     public function add(){
         return  response()->json(['route'=> 'add']);

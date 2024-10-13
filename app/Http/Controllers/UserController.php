@@ -10,6 +10,10 @@ class UserController extends Controller
     {
         return response()->json(['route' => 'dashboard page', 'method' => 'get']);
     }
+    public function UserLogin()
+    {
+        return view('user.login');
+    }
     public function profile()
     {
         return response()->json(['route' => 'profile page', 'method' => 'get']);
