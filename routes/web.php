@@ -22,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -49,7 +47,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
         Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('admin.logout');
         Route::post('/add',  'add')->name('admin.product.add');
         Route::patch('/update',  'edit')->name('admin.product.update');
-        Route::delete('/delete',  'delete')->name('admin.product.delete');
+        Route::delete('/delete/{id}',  'destroy')->name('admin.product.delete');
     });
 
     Route::controller(CategoryController::class)->group(function () {
@@ -70,7 +68,9 @@ Route::get('/user/login', [UserController::class, 'UserLogin'])->name('user.logi
 // End of User Routes 
 
 // Default Routes 
-Route::get('/index', [DefaultController::class, 'index'])->name('index');
+Route::get('/', [DefaultController::class, 'index'])->name('index');
 Route::get('/cart', [DefaultController::class, 'cartpage'])->name('cart.view');
+Route::get('/product', [ProductController::class, 'viewAllProducts'])->name('showproducts');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('viewproductdetails');
 
 require __DIR__ . '/auth.php';

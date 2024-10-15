@@ -75,8 +75,14 @@
                         <div class="d-flex gap-3 mt-3">
                             <a href="#" class="btn btn-primary"><span class="text">Update</span> <i
                                     class='bx bxs-pencil'></i></a>
-                            <a href="#" class="btn btn-outline-danger"><span class="text">Remove</span> <i
-                                    class='lni lni-close'></i> </a>
+                            <form action="{{ route('admin.product.delete', $product->_pid) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger">
+                                    <span class="text">Remove</span> <i class='lni lni-close'></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

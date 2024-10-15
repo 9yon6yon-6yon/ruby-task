@@ -84,8 +84,8 @@
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 product-grid">
             @foreach ($products as $product)
-                <a href="{{ route('admin.product.details', $product->_pid) }}" class="text-decoration-none">
-                    <div class="col">
+                <div class="col">
+                    <a href="{{ route('admin.product.details', $product->_pid) }}" class="text-decoration-none">
                         <div class="card">
                             @if ($product->images->isNotEmpty())
                                 <img src="{{ asset($product->images->first()->image_path) }}" class="card-img-top"
@@ -94,23 +94,32 @@
                                 <img src="https://www.shutterstock.com/image-vector/image-icon-600nw-211642900.jpg"
                                     class="card-img-top" alt="{{ $product->name }}">
                             @endif
-                         
-                            <div class="card-body">
-                                <h6 class="card-title cursor-pointer">{{ $product->name }}</h6>
-                                <div class="clearfix">
-                                    <p class="mb-0 float-start"><strong>{{  optional($product->inventory)->available_quantity ?? 0 }}</strong>Available</p>
-                                    <p class="mb-0 float-end fw-bold"><span
-                                            class="me-2 text-decoration-line-through text-secondary">{{ $product->price }}</span><span>{{ $product->price }}</span>
-                                    </p>
-                                </div>
-                                <div class="d-flex align-items-center mt-3 fs-6">
-                                    <p class="mb-0 ms-auto">{{$product->status}} </p>
-                                </div>
-                            </div>
+                    </a>
+                    <div class="card-body">
+                        <h6 class="card-title cursor-pointer">{{ $product->name }}</h6>
+                        <div class="clearfix">
+                            <p class="mb-0 float-start">
+                                <strong>{{ optional($product->inventory)->available_quantity ?? 0 }}</strong>Available</p>
+                            <p class="mb-0 float-end fw-bold"><span
+                                    class="me-2 text-decoration-line-through text-secondary">{{ $product->price }}</span><span>{{ $product->price }}</span>
+                            </p>
+                        </div>
+                        
+                        <div class="d-flex align-items-center mt-3 fs-6">
+                            <form action="{{ route('admin.product.delete', $product->_pid) }}" method="POST"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-outline-danger">
+                                    <span class="text">Remove</span> <i class='lni lni-close'></i>
+                                </button>
+                            </form>
+                            <p class="mb-0 ms-auto">{{ $product->status }} </p>
                         </div>
                     </div>
-                </a>
-            @endforeach
-        </div><!--end row-->
+                </div>
+        </div>
+        @endforeach
+    </div><!--end row-->
     </div>
 @endsection
