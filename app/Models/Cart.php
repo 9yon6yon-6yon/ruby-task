@@ -14,6 +14,13 @@ class Cart extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     protected $primaryKey = 'id';
+
+    protected $fillable = [
+        'session_id',  
+        'user_id',    
+        'products',
+    ];
+
     protected static function boot()
     {
         parent::boot();

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->uuid('session_id');  
-            $table->json('products'); 
+            $table->string('session_id');  
+            $table->json('products')->nullable(); 
             $table->timestamps();
         });
     }

@@ -23,5 +23,8 @@ class ProductController extends Controller
         return view('user.viewproductdetails', compact('product'));
     }
 
+    public function proceedToCheckoutpage(){
+        return view('user.checkout');
+    }
   
 }

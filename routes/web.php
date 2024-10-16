@@ -62,7 +62,7 @@ Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.
 Route::middleware(['auth', 'role:user'])->prefix('user')->group(function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile.view');
-    Route::get('/update', [UserController::class, 'checkout']);
+
 });
 Route::get('/user/login', [UserController::class, 'UserLogin'])->name('user.login');
 // End of User Routes 
@@ -70,6 +70,8 @@ Route::get('/user/login', [UserController::class, 'UserLogin'])->name('user.logi
 // Default Routes 
 Route::get('/', [DefaultController::class, 'index'])->name('index');
 Route::get('/cart', [DefaultController::class, 'cartpage'])->name('cart.view');
+Route::post('/add-to-cart/{id}', [DefaultController::class, 'addToCart'])->name('add.to.cart');
+Route::get('/checkout', [ProductController::class, 'proceedToCheckoutpage'])->name('checkout.view');
 Route::get('/product', [ProductController::class, 'viewAllProducts'])->name('showproducts');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('viewproductdetails');
 

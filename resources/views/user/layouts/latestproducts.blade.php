@@ -36,10 +36,16 @@
                                 </div>
                                 <div class="prd-bottom">
 
-                                    <a href="" class="social-info">
-                                        <span class="ti-bag"></span>
-                                        <p class="hover-text">add to bag</p>
-                                    </a>
+                                    <form action="{{ route('add.to.cart', $latestproduct->_pid) }}" method="POST"
+                                        style="display:inline;">
+                                        @csrf
+                                        @method('POST')
+                                        <button type="submit" style="display: inline">
+                                            <span class="ti-bag">
+                                                <p class="hover-text">add to bag</p>
+                                            </span>
+                                        </button>
+                                    </form>
 
                                     <a href="{{ route('viewproductdetails', $latestproduct->_pid) }}"
                                         class="social-info">

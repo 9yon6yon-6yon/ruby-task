@@ -288,14 +288,15 @@
                             <!-- single product -->
                             <div class="col-lg-4 col-md-6">
                                 <div class="single-product">
-                                    <a href="{{ route('viewproductdetails', $product->_pid) }}" class="text-decoration-none">
-                                    @if ($product->images->isNotEmpty())
-                                        <img src="{{ asset($product->images->first()->image_path) }}" class="img-fluid"
-                                            alt="{{ $product->name }}">
-                                    @else
-                                        <img src="https://www.shutterstock.com/image-vector/image-icon-600nw-211642900.jpg"
-                                            class="img-fluid" alt="{{ $product->name }}">
-                                    @endif
+                                    <a href="{{ route('viewproductdetails', $product->_pid) }}"
+                                        class="text-decoration-none">
+                                        @if ($product->images->isNotEmpty())
+                                            <img src="{{ asset($product->images->first()->image_path) }}"
+                                                class="img-fluid" alt="{{ $product->name }}">
+                                        @else
+                                            <img src="https://www.shutterstock.com/image-vector/image-icon-600nw-211642900.jpg"
+                                                class="img-fluid" alt="{{ $product->name }}">
+                                        @endif
                                     </a>
                                     <div class="product-details">
                                         <h6>{{ $product->name }}</h6>
@@ -304,16 +305,22 @@
                                             {{-- <h6 class="l-through">$210.00</h6> --}}
                                         </div>
                                         <div class="prd-bottom">
-
-                                            <a href="" class="social-info">
-                                                <span class="ti-bag"></span>
-                                                <p class="hover-text">add to bag</p>
-                                            </a>
-                                            <a href="" class="social-info">
+                                            <form action="{{ route('add.to.cart', $product->_pid) }}" method="POST"
+                                                style="display:inline;">
+                                                @csrf
+                                                @method('POST')
+                                                <button type="submit">
+                                                    <span class="ti-bag">
+                                                        <p class="hover-text">add to bag</p>
+                                                    </span>
+                                                </button>
+                                            </form>
+                                            <a href="#" class="social-info">
                                                 <span class="lnr lnr-heart"></span>
                                                 <p class="hover-text">Wishlist</p>
                                             </a>
-                                            <a href="{{ route('viewproductdetails', $product->_pid) }}" class="social-info">
+                                            <a href="{{ route('viewproductdetails', $product->_pid) }}"
+                                                class="social-info">
                                                 <span class="lnr lnr-move"></span>
                                                 <p class="hover-text">view more</p>
                                             </a>

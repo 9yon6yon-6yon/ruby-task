@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('cart_items', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->ulid('cart_id');
             $table->ulid('product_id');
             $table->integer('quantity');
             $table->timestamps();

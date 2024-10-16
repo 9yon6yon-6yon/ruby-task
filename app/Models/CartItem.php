@@ -25,6 +25,6 @@ class CartItem extends Model
     // Relation: A cart item belongs to a cart
     public function cart(): BelongsTo
     {
-        return $this->belongsTo(Cart::class);
+        return $this->belongsTo(Cart::class, 'cart_id');
     }
 }
