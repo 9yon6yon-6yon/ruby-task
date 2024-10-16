@@ -17,4 +17,8 @@ class DefaultController extends Controller
     {
         return response()->json(['route' => 'cart page', 'method' => 'get']);
     }
+    public function addToCart($id)
+    {
+        return null;
+    }
 }

@@ -11,7 +11,7 @@ use App\Models\ProductImage;
 use App\Models\StockHistory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-
+use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
@@ -42,8 +42,8 @@ class AdminController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required|numeric',
             'description' => 'nullable|string',
-            'images' => 'nullable|array|max:2048',
-            'images.*' => 'nullable|max:2048', // Allow multiple images
+            'images' => 'nullable|array|max:4096',
+            'images.*' => 'nullable|max:4096', // Allow multiple images
 
         ]);
 
@@ -83,12 +83,14 @@ class AdminController extends Controller
                 if (!File::exists($uploadPath)) {
                     File::makeDirectory($uploadPath, 0755, true, true);
                 }
-
                 // Generate a unique filename for the image
-                $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+                $imageName = time() . '_' . uniqid() . '.' . 'webp';
 
-                // Move the image to the specified directory
-                $image->move($uploadPath, $imageName);
+                // Resize the image and save it
+                Image::make($image)->resize(null, 300, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->encode('webp', 60)->save($uploadPath . '/' . $imageName);
 
                 // Save the image path in the database
                 ProductImage::create([
@@ -133,6 +135,21 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
+        // Retrieve associated images and delete them from the folder
+        $productImages = $product->images;
+
+        foreach ($productImages as $image) {
+            $imagePath = public_path($image->image_path);
+
+            // Check if the file exists before deleting
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+
+            // Optionally, delete the image record from the database
+            $image->delete();
+        }
+
         $product->delete();
         return redirect()->route('admin.listproducts')->with('success', 'Product deleted successfully.');
     }
